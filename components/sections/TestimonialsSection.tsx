@@ -165,7 +165,7 @@ export function TestimonialsSection() {
                   <div>
                     <StarRating />
                     <blockquote className="mt-5 text-lg text-[#D4E0F0] leading-relaxed font-light">
-                      "{t.quote}"
+                      &ldquo;{t.quote}&rdquo;
                     </blockquote>
 
                     {/* Author */}

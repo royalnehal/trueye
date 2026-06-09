@@ -1,31 +1,25 @@
-'use client'
+﻿'use client'
 
-import { useState, useEffect, useCallback, useRef } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import {
   Play, Pause, Shield, Users, Car, Eye, Thermometer,
-  HardHat, AlertTriangle, CheckCircle, Info, Wifi,
-  ChevronRight, Activity, ArrowRight,
+  HardHat, AlertTriangle, CheckCircle, Wifi,
+  Activity, ArrowRight,
 } from 'lucide-react'
 import Link from 'next/link'
 
-// ─── Types ────────────────────────────────────────────────────────────────────
+// â”€â”€â”€ Types â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
 type ModuleId = 'intrusion' | 'crowd' | 'ppe' | 'face' | 'vehicle' | 'heatmap'
 type Severity = 'critical' | 'warning' | 'info'
-
-interface Detection {
-  x: number; y: number; w: number; h: number
-  label: string; sub: string; confidence: number
-  severity: Severity; pulse?: boolean
-}
 
 interface AlertItem {
   id: number; ts: string; cam: string
   msg: string; severity: Severity
 }
 
-// ─── Module Config ─────────────────────────────────────────────────────────────
+// â”€â”€â”€ Module Config â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
 const MODULES = [
   {
@@ -36,14 +30,14 @@ const MODULES = [
     tw: { border: 'border-red-500/40', bg: 'bg-red-500/10', text: 'text-red-400', glow: 'shadow-red-500/20' },
     detections: [
       { x: 14, y: 22, w: 13, h: 36, label: 'INTRUDER', sub: 'Restricted Zone A', confidence: 98.7, severity: 'critical' as Severity, pulse: true },
-      { x: 60, y: 28, w: 12, h: 33, label: 'PERSON', sub: 'Zone B — Monitored', confidence: 94.2, severity: 'warning' as Severity },
+      { x: 60, y: 28, w: 12, h: 33, label: 'PERSON', sub: 'Zone B â€” Monitored', confidence: 94.2, severity: 'warning' as Severity },
     ],
     alerts: [
-      ['Unauthorised entry — Zone A3 breached', 'critical' as Severity],
+      ['Unauthorised entry â€” Zone A3 breached', 'critical' as Severity],
       ['Person detected in restricted perimeter', 'critical' as Severity],
-      ['After-hours intrusion — Gate 2', 'warning' as Severity],
-      ['Motion in no-access zone — Building rear', 'warning' as Severity],
-      ['Perimeter breach cleared — Zone A3', 'info' as Severity],
+      ['After-hours intrusion â€” Gate 2', 'warning' as Severity],
+      ['Motion in no-access zone â€” Building rear', 'warning' as Severity],
+      ['Perimeter breach cleared â€” Zone A3', 'info' as Severity],
     ],
     stat: { label: 'Intrusions Blocked', value: '1,247', sub: '+3 today' },
     desc: 'Detects unauthorised entry into restricted zones in real time with <2s alert latency.',
@@ -62,11 +56,11 @@ const MODULES = [
       { x: 67, y: 31, w: 11, h: 28, label: '#5', sub: 'Density HIGH', confidence: 95.7, severity: 'warning' as Severity, pulse: true },
     ],
     alerts: [
-      ['Crowd density HIGH — 47 persons in Zone C', 'critical' as Severity],
-      ['Queue length exceeded threshold — Exit 3', 'warning' as Severity],
+      ['Crowd density HIGH â€” 47 persons in Zone C', 'critical' as Severity],
+      ['Queue length exceeded threshold â€” Exit 3', 'warning' as Severity],
       ['Social distancing violation detected', 'warning' as Severity],
-      ['Overcrowding alert — Lobby Area', 'critical' as Severity],
-      ['Crowd density normalising — Zone C', 'info' as Severity],
+      ['Overcrowding alert â€” Lobby Area', 'critical' as Severity],
+      ['Crowd density normalising â€” Zone C', 'info' as Severity],
     ],
     stat: { label: 'People Counted Today', value: '8,432', sub: 'Peak: 2:30 PM' },
     desc: 'Real-time headcount, density heatmaps, and crowd flow analytics across all zones.',
@@ -82,14 +76,14 @@ const MODULES = [
       { x: 56, y: 20, w: 14, h: 37, label: 'VIOLATION', sub: 'No Helmet', confidence: 97.6, severity: 'critical' as Severity, pulse: true },
     ],
     alerts: [
-      ['PPE violation — Worker #4, No helmet', 'critical' as Severity],
-      ['Safety gear missing — Zone D, Bay 3', 'critical' as Severity],
-      ['High-vis vest not detected — Forklift area', 'warning' as Severity],
-      ['No safety goggles — Chemical zone', 'warning' as Severity],
-      ['Compliance rate improved — Shift 2: 98%', 'info' as Severity],
+      ['PPE violation â€” Worker #4, No helmet', 'critical' as Severity],
+      ['Safety gear missing â€” Zone D, Bay 3', 'critical' as Severity],
+      ['High-vis vest not detected â€” Forklift area', 'warning' as Severity],
+      ['No safety goggles â€” Chemical zone', 'warning' as Severity],
+      ['Compliance rate improved â€” Shift 2: 98%', 'info' as Severity],
     ],
-    stat: { label: 'Safety Violations Today', value: '12', sub: '↓ 34% vs yesterday' },
-    desc: 'Automatically detects helmets, vests, goggles, and gloves — zero manual inspection.',
+    stat: { label: 'Safety Violations Today', value: '12', sub: 'â†“ 34% vs yesterday' },
+    desc: 'Automatically detects helmets, vests, goggles, and gloves â€” zero manual inspection.',
   },
   {
     id: 'face' as ModuleId,
@@ -102,11 +96,11 @@ const MODULES = [
       { x: 59, y: 17, w: 14, h: 18, label: 'UNKNOWN', sub: 'No DB match', confidence: 91.2, severity: 'critical' as Severity, pulse: true },
     ],
     alerts: [
-      ['Unknown face — Server Room entrance', 'critical' as Severity],
-      ['Blacklisted individual — Alert sent', 'critical' as Severity],
-      ['VIP recognised — Mr. Sharma, Director', 'info' as Severity],
-      ['Tailgating attempt — 2 persons, 1 auth', 'warning' as Severity],
-      ['Access granted — Biometric verified', 'info' as Severity],
+      ['Unknown face â€” Server Room entrance', 'critical' as Severity],
+      ['Blacklisted individual â€” Alert sent', 'critical' as Severity],
+      ['VIP recognised â€” Mr. Sharma, Director', 'info' as Severity],
+      ['Tailgating attempt â€” 2 persons, 1 auth', 'warning' as Severity],
+      ['Access granted â€” Biometric verified', 'info' as Severity],
     ],
     stat: { label: 'Faces Recognised Today', value: '2,891', sub: '3 unknowns flagged' },
     desc: 'Identifies authorised staff, flags unknown faces, and logs entry/exit events.',
@@ -123,10 +117,10 @@ const MODULES = [
     ],
     alerts: [
       ['Blacklisted plate: DL 4C 9021 detected', 'critical' as Severity],
-      ['Unregistered vehicle — Parking Zone B', 'warning' as Severity],
-      ['Wrong-way vehicle — Entrance 1', 'critical' as Severity],
+      ['Unregistered vehicle â€” Parking Zone B', 'warning' as Severity],
+      ['Wrong-way vehicle â€” Entrance 1', 'critical' as Severity],
       ['Overspeeding: 42 km/h in 20 zone', 'warning' as Severity],
-      ['Vehicle RJ 14 AB 2341 — Exit logged', 'info' as Severity],
+      ['Vehicle RJ 14 AB 2341 â€” Exit logged', 'info' as Severity],
     ],
     stat: { label: 'Vehicles Processed Today', value: '634', sub: '2 violations flagged' },
     desc: 'Reads number plates in motion, cross-checks against allow/block lists instantly.',
@@ -139,11 +133,11 @@ const MODULES = [
     tw: { border: 'border-pink-500/40', bg: 'bg-pink-500/10', text: 'text-pink-400', glow: 'shadow-pink-500/20' },
     detections: [],
     alerts: [
-      ['Hot zone — Checkout Area 3 (94% density)', 'critical' as Severity],
-      ['Idle zone detected — Aisle 7 (low traffic)', 'info' as Severity],
-      ['Peak path mapped — Entrance to Aisle 2', 'info' as Severity],
-      ['Staff gap — Zone F, 11AM–1PM window', 'warning' as Severity],
-      ['Heat map report generated — Last 24h', 'info' as Severity],
+      ['Hot zone â€” Checkout Area 3 (94% density)', 'critical' as Severity],
+      ['Idle zone detected â€” Aisle 7 (low traffic)', 'info' as Severity],
+      ['Peak path mapped â€” Entrance to Aisle 2', 'info' as Severity],
+      ['Staff gap â€” Zone F, 11AMâ€“1PM window', 'warning' as Severity],
+      ['Heat map report generated â€” Last 24h', 'info' as Severity],
     ],
     stat: { label: 'Zones Monitored', value: '24', sub: '6 hot zones active' },
     desc: 'Visualises foot traffic density over time to optimise layouts and staffing.',
@@ -167,18 +161,18 @@ function getTime() {
   return new Date().toLocaleTimeString('en-IN', { hour12: false })
 }
 
-// ─── Camera Feed SVG ──────────────────────────────────────────────────────────
+// â”€â”€â”€ Camera Feed SVG â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
 function CameraFeed({
-  module, camId, isMain, onClick,
+  mod, camId, isMain, onClick,
 }: {
-  module: typeof MODULES[0]
+  mod: typeof MODULES[0]
   camId: number
   isMain: boolean
   onClick?: () => void
 }) {
   const cam = CAMERAS[camId - 1]
-  const isHeatmap = module.id === 'heatmap'
+  const isHeatmap = mod.id === 'heatmap'
 
   return (
     <div
@@ -259,7 +253,7 @@ function CameraFeed({
         )}
 
         {/* Detections */}
-        {!isHeatmap && module.detections.map((d, i) => {
+        {!isHeatmap && mod.detections.map((d, i) => {
           const x = (d.x / 100) * 400
           const y = (d.y / 100) * 225
           const w = (d.w / 100) * 400
@@ -355,8 +349,8 @@ function CameraFeed({
         {/* Active module badge */}
         <div className="absolute bottom-1 right-2">
           <span className="text-[8px] font-mono px-1.5 py-0.5 rounded"
-            style={{ backgroundColor: module.color + '30', color: module.color }}>
-            {module.label.toUpperCase()}
+            style={{ backgroundColor: mod.color + '30', color: mod.color }}>
+            {mod.label.toUpperCase()}
           </span>
         </div>
       </div>
@@ -364,13 +358,13 @@ function CameraFeed({
       {/* Selected indicator */}
       {isMain && (
         <div className="absolute inset-0 ring-2 ring-inset pointer-events-none rounded-xl"
-          style={{ boxShadow: `inset 0 0 0 2px ${module.color}50` }} />
+          style={{ boxShadow: `inset 0 0 0 2px ${mod.color}50` }} />
       )}
     </div>
   )
 }
 
-// ─── Alert Feed ───────────────────────────────────────────────────────────────
+// â”€â”€â”€ Alert Feed â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
 function AlertFeed({ alerts }: { alerts: AlertItem[] }) {
   const SevIcon = ({ sev }: { sev: Severity }) => {
@@ -400,7 +394,7 @@ function AlertFeed({ alerts }: { alerts: AlertItem[] }) {
             <SevIcon sev={a.severity} />
             <div className="min-w-0">
               <div className="text-[#F0F4FF]/80 leading-snug">{a.msg}</div>
-              <div className="text-[#6B7FA3] text-[10px] mt-0.5 font-mono">{a.cam} · {a.ts}</div>
+              <div className="text-[#6B7FA3] text-[10px] mt-0.5 font-mono">{a.cam} Â· {a.ts}</div>
             </div>
           </motion.div>
         ))}
@@ -409,7 +403,7 @@ function AlertFeed({ alerts }: { alerts: AlertItem[] }) {
   )
 }
 
-// ─── Main Component ───────────────────────────────────────────────────────────
+// â”€â”€â”€ Main Component â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
 export function DemoSimulator() {
   const [activeModule, setActiveModule] = useState(0)
@@ -420,11 +414,11 @@ export function DemoSimulator() {
   const alertIdRef = useRef(100)
   const tickRef = useRef(0)
 
-  const module = MODULES[activeModule]
+  const activeModuleData = MODULES[activeModule]
 
   // Seed initial alerts
   useEffect(() => {
-    const initial: AlertItem[] = module.alerts.slice(0, 4).map((a, i) => ({
+    const initial: AlertItem[] = activeModuleData.alerts.slice(0, 4).map((a, i) => ({
       id: i,
       ts: getTime(),
       cam: `CAM-0${(i % 4) + 1}`,
@@ -439,7 +433,7 @@ export function DemoSimulator() {
     if (!playing) return
     const timer = setInterval(() => {
       tickRef.current++
-      const alertConfig = module.alerts[tickRef.current % module.alerts.length]
+      const alertConfig = activeModuleData.alerts[tickRef.current % activeModuleData.alerts.length]
       const newAlert: AlertItem = {
         id: alertIdRef.current++,
         ts: getTime(),
@@ -455,26 +449,26 @@ export function DemoSimulator() {
       }))
     }, 2800)
     return () => clearInterval(timer)
-  }, [playing, activeModule, module.alerts])
+  }, [playing, activeModule, activeModuleData.alerts])
 
   return (
     <section className="py-24 bg-[#050A14] relative overflow-hidden">
       {/* Background glow */}
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[400px] rounded-full opacity-[0.04]"
-        style={{ background: `radial-gradient(ellipse, ${module.color}, transparent 70%)` }} />
+        style={{ background: `radial-gradient(ellipse, ${activeModuleData.color}, transparent 70%)` }} />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
 
         {/* Header */}
         <div className="text-center mb-10">
-          <span className="text-xs font-semibold tracking-[0.15em] uppercase mb-3 block" style={{ color: module.color }}>
+          <span className="text-xs font-semibold tracking-[0.15em] uppercase mb-3 block" style={{ color: activeModuleData.color }}>
             Interactive Demo
           </span>
           <h2 className="font-poppins font-bold text-display-md md:text-display-lg text-[#F0F4FF] leading-tight mb-4">
             See TruEye AI in Action
           </h2>
           <p className="text-[#6B7FA3] text-body-lg max-w-2xl mx-auto">
-            Switch between AI modules and watch real-time detections, alerts, and analytics — live in your browser.
+            Switch between AI modules and watch real-time detections, alerts, and analytics â€” live in your browser.
           </p>
         </div>
 
@@ -505,7 +499,7 @@ export function DemoSimulator() {
         {/* Main layout */}
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-4">
 
-          {/* LEFT — Camera feeds */}
+          {/* LEFT â€” Camera feeds */}
           <div className="lg:col-span-2 flex flex-col gap-3">
 
             {/* Control bar */}
@@ -514,8 +508,8 @@ export function DemoSimulator() {
                 <span className="w-2 h-2 rounded-full bg-red-500 animate-pulse" />
                 <span className="text-xs font-mono text-[#F0F4FF]">TruEye LIVE</span>
                 <span className="text-[10px] text-[#6B7FA3] font-mono hidden sm:inline">|</span>
-                <span className="text-[10px] font-mono hidden sm:inline" style={{ color: module.color }}>
-                  {module.label.toUpperCase()}
+                <span className="text-[10px] font-mono hidden sm:inline" style={{ color: activeModuleData.color }}>
+                  {activeModuleData.label.toUpperCase()}
                 </span>
               </div>
               <div className="flex items-center gap-3">
@@ -535,7 +529,7 @@ export function DemoSimulator() {
             </div>
 
             {/* Main camera */}
-            <CameraFeed module={module} camId={mainCam} isMain={true} />
+            <CameraFeed mod={activeModuleData} camId={mainCam} isMain={true} />
 
             {/* Thumbnail cameras */}
             <div className="grid grid-cols-4 gap-2">
@@ -543,9 +537,9 @@ export function DemoSimulator() {
                 <div key={cam.id} className={`relative rounded-lg overflow-hidden transition-all duration-200 ${
                   mainCam === cam.id ? 'ring-2' : 'opacity-60 hover:opacity-90'
                 }`}
-                  style={mainCam === cam.id ? { boxShadow: `0 0 0 2px ${module.color}` } : {}}>
+                  style={mainCam === cam.id ? { boxShadow: `0 0 0 2px ${activeModuleData.color}` } : {}}>
                   <CameraFeed
-                    module={module}
+                    mod={activeModuleData}
                     camId={cam.id}
                     isMain={false}
                     onClick={() => setMainCam(cam.id)}
@@ -555,35 +549,35 @@ export function DemoSimulator() {
             </div>
           </div>
 
-          {/* RIGHT — Info panel */}
+          {/* RIGHT â€” Info panel */}
           <div className="flex flex-col gap-3">
 
             {/* Module info card */}
-            <div className={`p-4 rounded-xl border ${module.tw.border} ${module.tw.bg}`}>
+            <div className={`p-4 rounded-xl border ${activeModuleData.tw.border} ${activeModuleData.tw.bg}`}>
               <div className="flex items-center gap-2 mb-2">
-                {(() => { const Icon = module.icon; return <Icon size={16} style={{ color: module.color }} /> })()}
-                <span className="font-poppins font-bold text-[#F0F4FF] text-sm">{module.label}</span>
+                {(() => { const Icon = activeModuleData.icon; return <Icon size={16} style={{ color: activeModuleData.color }} /> })()}
+                <span className="font-poppins font-bold text-[#F0F4FF] text-sm">{activeModuleData.label}</span>
               </div>
-              <p className="text-[#6B7FA3] text-xs leading-relaxed">{module.desc}</p>
+              <p className="text-[#6B7FA3] text-xs leading-relaxed">{activeModuleData.desc}</p>
               <div className="mt-3 p-3 rounded-lg bg-black/30 border border-white/5">
-                <div className="text-2xl font-poppins font-bold" style={{ color: module.color }}>
-                  {module.stat.value}
+                <div className="text-2xl font-poppins font-bold" style={{ color: activeModuleData.color }}>
+                  {activeModuleData.stat.value}
                 </div>
-                <div className="text-[#6B7FA3] text-xs">{module.stat.label}</div>
-                <div className="text-[10px] mt-0.5" style={{ color: module.color }}>{module.stat.sub}</div>
+                <div className="text-[#6B7FA3] text-xs">{activeModuleData.stat.label}</div>
+                <div className="text-[10px] mt-0.5" style={{ color: activeModuleData.color }}>{activeModuleData.stat.sub}</div>
               </div>
             </div>
 
             {/* Active detections */}
-            {module.detections.length > 0 && (
+            {activeModuleData.detections.length > 0 && (
               <div className="p-4 rounded-xl border border-white/8 bg-[#0A1628]">
                 <div className="flex items-center gap-2 mb-3">
                   <Activity size={12} className="text-[#6B7FA3]" />
                   <span className="text-xs font-semibold text-[#6B7FA3] uppercase tracking-wider">Active Detections</span>
-                  <span className="ml-auto text-[10px] font-mono text-[#00D4FF]">{module.detections.length} objects</span>
+                  <span className="ml-auto text-[10px] font-mono text-[#00D4FF]">{activeModuleData.detections.length} objects</span>
                 </div>
                 <div className="flex flex-col gap-1.5">
-                  {module.detections.map((d, i) => (
+                  {activeModuleData.detections.map((d, i) => (
                     <div key={i} className="flex items-center justify-between p-2 rounded-lg bg-black/30 border border-white/5">
                       <div className="flex items-center gap-2">
                         <span className="w-2 h-2 rounded-full flex-shrink-0"
@@ -616,7 +610,7 @@ export function DemoSimulator() {
             <Link
               href="/#requestdemo"
               className="flex items-center justify-center gap-2 py-3 px-5 rounded-xl font-semibold text-sm text-black transition-all hover:scale-[1.02] hover:shadow-xl"
-              style={{ backgroundColor: module.color, boxShadow: `0 4px 20px ${module.color}40` }}
+              style={{ backgroundColor: activeModuleData.color, boxShadow: `0 4px 20px ${activeModuleData.color}40` }}
             >
               Get a Live Demo <ArrowRight size={16} />
             </Link>
