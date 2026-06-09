@@ -109,50 +109,122 @@ export default function HomePage() {
       {/* Hero section */}
       <HeroSection />
 
-      {/* Trusted by */}
-      <div className="bg-[#0A1628] border-y border-white/5 py-10">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <p className="text-xs font-semibold tracking-[0.2em] uppercase text-[#6B7FA3] text-center mb-8">
-            Trusted By
-          </p>
-          <div className="flex items-center justify-center gap-10 sm:gap-16 flex-wrap">
-            {/* P&G */}
-            <div className="opacity-50 hover:opacity-100 transition-opacity" aria-label="P&G">
-              <svg width="60" height="36" viewBox="0 0 60 36" fill="none">
-                <text x="2" y="28" fontFamily="Georgia, serif" fontWeight="700" fontSize="28" fill="#F0F4FF">P&amp;G</text>
-              </svg>
-            </div>
-            {/* Maruti Suzuki */}
-            <div className="opacity-50 hover:opacity-100 transition-opacity" aria-label="Maruti Suzuki">
-              <svg width="110" height="36" viewBox="0 0 110 36" fill="none">
-                <text x="0" y="22" fontFamily="Arial, sans-serif" fontWeight="800" fontSize="14" fill="#F0F4FF" letterSpacing="1.5">MARUTI</text>
-                <text x="0" y="34" fontFamily="Arial, sans-serif" fontWeight="400" fontSize="9" fill="#6B7FA3" letterSpacing="3.5">SUZUKI</text>
-              </svg>
-            </div>
-            {/* Hero Honda */}
-            <div className="opacity-50 hover:opacity-100 transition-opacity" aria-label="Hero Honda">
-              <svg width="110" height="36" viewBox="0 0 110 36" fill="none">
-                <rect x="0" y="6" width="44" height="20" rx="2" fill="#CC0000" />
-                <text x="5" y="21" fontFamily="Arial, sans-serif" fontWeight="900" fontSize="12" fill="white">HERO</text>
-                <text x="50" y="21" fontFamily="Arial, sans-serif" fontWeight="700" fontSize="12" fill="#F0F4FF">HONDA</text>
-              </svg>
-            </div>
-            {/* Rajasthan Patrika */}
-            <div className="opacity-50 hover:opacity-100 transition-opacity" aria-label="Rajasthan Patrika">
-              <svg width="120" height="36" viewBox="0 0 120 36" fill="none">
-                <text x="0" y="16" fontFamily="Georgia, serif" fontWeight="700" fontSize="11" fill="#F0F4FF" letterSpacing="0.5">RAJASTHAN</text>
-                <text x="0" y="32" fontFamily="Georgia, serif" fontWeight="400" fontSize="11" fill="#00D4FF" letterSpacing="1">PATRIKA</text>
-              </svg>
-            </div>
-            {/* Digital Hospitality */}
-            <div className="opacity-50 hover:opacity-100 transition-opacity" aria-label="Digital Hospitality">
-              <svg width="130" height="36" viewBox="0 0 130 36" fill="none">
-                <text x="0" y="16" fontFamily="Arial, sans-serif" fontWeight="700" fontSize="11" fill="#00D4FF" letterSpacing="1">DIGITAL</text>
-                <text x="0" y="32" fontFamily="Arial, sans-serif" fontWeight="400" fontSize="11" fill="#F0F4FF" letterSpacing="0.5">HOSPITALITY</text>
-              </svg>
-            </div>
+      {/* Trusted by — infinite marquee */}
+      <div className="bg-[#0A1628] border-y border-white/5 py-10 overflow-hidden">
+        <p className="text-xs font-semibold tracking-[0.2em] uppercase text-[#6B7FA3] text-center mb-8">
+          Trusted By
+        </p>
+        <div className="relative">
+          {/* Fade edges */}
+          <div className="absolute left-0 top-0 bottom-0 w-24 z-10 pointer-events-none"
+            style={{ background: 'linear-gradient(to right, #0A1628, transparent)' }} />
+          <div className="absolute right-0 top-0 bottom-0 w-24 z-10 pointer-events-none"
+            style={{ background: 'linear-gradient(to left, #0A1628, transparent)' }} />
+
+          {/* Marquee track */}
+          <div className="flex items-center" style={{ animation: 'marquee 28s linear infinite' }}>
+            {/* First set */}
+            {[
+              /* P&G */
+              <svg key="pg1" width="60" height="40" viewBox="0 0 60 40" fill="none" aria-label="P&G">
+                <text x="2" y="30" fontFamily="Georgia, serif" fontWeight="700" fontSize="28" fill="#F0F4FF">P&amp;G</text>
+              </svg>,
+              /* Maruti Suzuki */
+              <svg key="maruti1" width="110" height="40" viewBox="0 0 110 40" fill="none" aria-label="Maruti Suzuki">
+                <text x="0" y="24" fontFamily="Arial, sans-serif" fontWeight="800" fontSize="14" fill="#F0F4FF" letterSpacing="1.5">MARUTI</text>
+                <text x="0" y="36" fontFamily="Arial, sans-serif" fontWeight="400" fontSize="9" fill="#6B7FA3" letterSpacing="3.5">SUZUKI</text>
+              </svg>,
+              /* Hero Honda */
+              <svg key="hero1" width="120" height="40" viewBox="0 0 120 40" fill="none" aria-label="Hero Honda">
+                <rect x="0" y="8" width="46" height="22" rx="3" fill="#CC0000" />
+                <text x="5" y="24" fontFamily="Arial, sans-serif" fontWeight="900" fontSize="13" fill="white">HERO</text>
+                <text x="52" y="24" fontFamily="Arial, sans-serif" fontWeight="700" fontSize="13" fill="#F0F4FF">HONDA</text>
+              </svg>,
+              /* Rajasthan Patrika */
+              <svg key="rp1" width="130" height="40" viewBox="0 0 130 40" fill="none" aria-label="Rajasthan Patrika">
+                <text x="0" y="18" fontFamily="Georgia, serif" fontWeight="700" fontSize="12" fill="#F0F4FF" letterSpacing="0.5">RAJASTHAN</text>
+                <text x="0" y="34" fontFamily="Georgia, serif" fontWeight="400" fontSize="12" fill="#00D4FF" letterSpacing="1">PATRIKA</text>
+              </svg>,
+              /* Digital Hospitality */
+              <svg key="dh1" width="140" height="40" viewBox="0 0 140 40" fill="none" aria-label="Digital Hospitality">
+                <text x="0" y="18" fontFamily="Arial, sans-serif" fontWeight="700" fontSize="12" fill="#00D4FF" letterSpacing="1">DIGITAL</text>
+                <text x="0" y="34" fontFamily="Arial, sans-serif" fontWeight="400" fontSize="12" fill="#F0F4FF" letterSpacing="0.5">HOSPITALITY</text>
+              </svg>,
+              /* MVM Infotech */
+              <svg key="mvm1" width="140" height="40" viewBox="0 0 140 40" fill="none" aria-label="MVM Infotech">
+                <rect x="0" y="6" width="36" height="22" rx="3" fill="#00D4FF" opacity="0.15" />
+                <text x="4" y="22" fontFamily="Arial, sans-serif" fontWeight="900" fontSize="14" fill="#00D4FF">MVM</text>
+                <text x="42" y="22" fontFamily="Arial, sans-serif" fontWeight="600" fontSize="13" fill="#F0F4FF" letterSpacing="0.5">INFOTECH</text>
+              </svg>,
+              /* Taste of City */
+              <svg key="toc1" width="140" height="40" viewBox="0 0 140 40" fill="none" aria-label="Taste of City">
+                <circle cx="10" cy="20" r="8" fill="#F59E0B" opacity="0.2" />
+                <circle cx="10" cy="20" r="4" fill="#F59E0B" />
+                <text x="24" y="17" fontFamily="Georgia, serif" fontWeight="700" fontSize="11" fill="#F59E0B" letterSpacing="0.5">TASTE OF</text>
+                <text x="24" y="32" fontFamily="Georgia, serif" fontWeight="400" fontSize="11" fill="#F0F4FF" letterSpacing="1">CITY</text>
+              </svg>,
+              /* RS Group */
+              <svg key="rs1" width="120" height="40" viewBox="0 0 120 40" fill="none" aria-label="RS Group">
+                <rect x="0" y="6" width="32" height="26" rx="4" fill="#A855F7" opacity="0.15" />
+                <text x="5" y="25" fontFamily="Arial, sans-serif" fontWeight="900" fontSize="16" fill="#A855F7">RS</text>
+                <text x="38" y="25" fontFamily="Arial, sans-serif" fontWeight="600" fontSize="13" fill="#F0F4FF" letterSpacing="1">GROUP</text>
+              </svg>,
+            ].map((logo, i) => (
+              <div key={i} className="flex-shrink-0 mx-10 opacity-50 hover:opacity-100 transition-opacity duration-300">
+                {logo}
+              </div>
+            ))}
+            {/* Duplicate set for seamless loop */}
+            {[
+              <svg key="pg2" width="60" height="40" viewBox="0 0 60 40" fill="none" aria-label="P&G">
+                <text x="2" y="30" fontFamily="Georgia, serif" fontWeight="700" fontSize="28" fill="#F0F4FF">P&amp;G</text>
+              </svg>,
+              <svg key="maruti2" width="110" height="40" viewBox="0 0 110 40" fill="none" aria-label="Maruti Suzuki">
+                <text x="0" y="24" fontFamily="Arial, sans-serif" fontWeight="800" fontSize="14" fill="#F0F4FF" letterSpacing="1.5">MARUTI</text>
+                <text x="0" y="36" fontFamily="Arial, sans-serif" fontWeight="400" fontSize="9" fill="#6B7FA3" letterSpacing="3.5">SUZUKI</text>
+              </svg>,
+              <svg key="hero2" width="120" height="40" viewBox="0 0 120 40" fill="none" aria-label="Hero Honda">
+                <rect x="0" y="8" width="46" height="22" rx="3" fill="#CC0000" />
+                <text x="5" y="24" fontFamily="Arial, sans-serif" fontWeight="900" fontSize="13" fill="white">HERO</text>
+                <text x="52" y="24" fontFamily="Arial, sans-serif" fontWeight="700" fontSize="13" fill="#F0F4FF">HONDA</text>
+              </svg>,
+              <svg key="rp2" width="130" height="40" viewBox="0 0 130 40" fill="none" aria-label="Rajasthan Patrika">
+                <text x="0" y="18" fontFamily="Georgia, serif" fontWeight="700" fontSize="12" fill="#F0F4FF" letterSpacing="0.5">RAJASTHAN</text>
+                <text x="0" y="34" fontFamily="Georgia, serif" fontWeight="400" fontSize="12" fill="#00D4FF" letterSpacing="1">PATRIKA</text>
+              </svg>,
+              <svg key="dh2" width="140" height="40" viewBox="0 0 140 40" fill="none" aria-label="Digital Hospitality">
+                <text x="0" y="18" fontFamily="Arial, sans-serif" fontWeight="700" fontSize="12" fill="#00D4FF" letterSpacing="1">DIGITAL</text>
+                <text x="0" y="34" fontFamily="Arial, sans-serif" fontWeight="400" fontSize="12" fill="#F0F4FF" letterSpacing="0.5">HOSPITALITY</text>
+              </svg>,
+              <svg key="mvm2" width="140" height="40" viewBox="0 0 140 40" fill="none" aria-label="MVM Infotech">
+                <rect x="0" y="6" width="36" height="22" rx="3" fill="#00D4FF" opacity="0.15" />
+                <text x="4" y="22" fontFamily="Arial, sans-serif" fontWeight="900" fontSize="14" fill="#00D4FF">MVM</text>
+                <text x="42" y="22" fontFamily="Arial, sans-serif" fontWeight="600" fontSize="13" fill="#F0F4FF" letterSpacing="0.5">INFOTECH</text>
+              </svg>,
+              <svg key="toc2" width="140" height="40" viewBox="0 0 140 40" fill="none" aria-label="Taste of City">
+                <circle cx="10" cy="20" r="8" fill="#F59E0B" opacity="0.2" />
+                <circle cx="10" cy="20" r="4" fill="#F59E0B" />
+                <text x="24" y="17" fontFamily="Georgia, serif" fontWeight="700" fontSize="11" fill="#F59E0B" letterSpacing="0.5">TASTE OF</text>
+                <text x="24" y="32" fontFamily="Georgia, serif" fontWeight="400" fontSize="11" fill="#F0F4FF" letterSpacing="1">CITY</text>
+              </svg>,
+              <svg key="rs2" width="120" height="40" viewBox="0 0 120 40" fill="none" aria-label="RS Group">
+                <rect x="0" y="6" width="32" height="26" rx="4" fill="#A855F7" opacity="0.15" />
+                <text x="5" y="25" fontFamily="Arial, sans-serif" fontWeight="900" fontSize="16" fill="#A855F7">RS</text>
+                <text x="38" y="25" fontFamily="Arial, sans-serif" fontWeight="600" fontSize="13" fill="#F0F4FF" letterSpacing="1">GROUP</text>
+              </svg>,
+            ].map((logo, i) => (
+              <div key={`dup-${i}`} className="flex-shrink-0 mx-10 opacity-50 hover:opacity-100 transition-opacity duration-300">
+                {logo}
+              </div>
+            ))}
           </div>
         </div>
+        <style>{`
+          @keyframes marquee {
+            0%   { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+          }
+        `}</style>
       </div>
 
       <WhatIsTruEye />
