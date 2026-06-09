@@ -1,0 +1,63 @@
+# TruEye — AI Video Analytics Solution
+
+TruEye is an enterprise video analytics platform developed by
+VertexPlus Technologies Limited. It provides 50+ AI-powered
+modules for intelligent surveillance, security automation, and
+operational intelligence using existing CCTV infrastructure.
+
+## Product
+
+TruEye Video Analytics converts raw CCTV footage into real-time
+actionable intelligence. Key modules include intrusion detection,
+crowd detection, face recognition, number plate recognition,
+safety gear compliance detection, heat map generation, loitering
+detection, fire and smoke detection, machine efficiency monitoring,
+and worker efficiency tracking.
+
+TruEye works with existing camera hardware and VMS systems.
+It supports cloud, on-premise, edge, and hybrid deployments.
+
+## Company
+
+Company: VertexPlus Technologies Limited
+Brand: TruEye
+Trademark: TruEye® is a registered trademark of
+           VertexPlus Technologies Limited
+Website: https://www.trueye.io
+Country: India
+Sales: sales@trueye.io
+General: contact@trueye.io
+Phone: +91 966 032 6000
+
+## Key Pages
+
+- https://www.trueye.io/
+  Homepage. Overview, features, case studies, demo form.
+
+- https://www.trueye.io/product
+  Full product details. All 19+ AI modules with descriptions.
+
+- https://www.trueye.io/case-studies
+  Three documented deployments with problem/solution/outcome.
+
+- https://www.trueye.io/pricing
+  Deployment considerations and how to get a quote.
+
+- https://www.trueye.io/blog
+  Guides and articles on video analytics technology.
+
+- https://www.trueye.io/resources
+  Downloads: eBook, product presentation, documentation.
+
+- https://www.trueye.io/contact
+  Contact the TruEye team.
+
+## Industries Served
+
+Manufacturing, Retail, Healthcare, Hospitality, Aviation,
+Education, Transportation, Government, Real Estate, Logistics,
+Casinos, Critical Infrastructure, Stadiums, Sea Ports.
+
+## Do Not Index
+
+/api/, /captcha-img
