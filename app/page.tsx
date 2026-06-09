@@ -1,4 +1,5 @@
 import type { Metadata } from 'next'
+import { DemoSimulator } from '@/components/sections/DemoSimulator'
 import { HeroSection } from '@/components/sections/HeroSection'
 import { WhatIsTruEye } from '@/components/sections/WhatIsTruEye'
 import { StatsBar } from '@/components/sections/StatsBar'
@@ -152,6 +153,7 @@ export default function HomePage() {
 
       <WhatIsTruEye />
       <StatsBar />
+      <DemoSimulator />
       <FeaturesGrid />
       <UseCasesGrid />
       <CaseStudiesSection />
