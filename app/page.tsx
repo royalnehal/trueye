@@ -1,6 +1,9 @@
 import type { Metadata } from 'next'
 import { DemoSimulator } from '@/components/sections/DemoSimulator'
 import { ROICalculator } from '@/components/sections/ROICalculator'
+import { DeploymentMap } from '@/components/sections/DeploymentMap'
+import { TestimonialsSection } from '@/components/sections/TestimonialsSection'
+import { VideoShowcase } from '@/components/sections/VideoShowcase'
 import { HeroSection } from '@/components/sections/HeroSection'
 import { WhatIsTruEye } from '@/components/sections/WhatIsTruEye'
 import { StatsBar } from '@/components/sections/StatsBar'
@@ -156,9 +159,12 @@ export default function HomePage() {
       <StatsBar />
       <DemoSimulator />
       <ROICalculator />
+      <VideoShowcase />
+      <TestimonialsSection />
       <FeaturesGrid />
       <UseCasesGrid />
       <CaseStudiesSection />
+      <DeploymentMap />
       <BenefitsGrid />
 
       <GlowDivider />
