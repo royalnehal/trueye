@@ -1,9 +1,7 @@
 import type { Metadata } from 'next'
 import { Space_Grotesk, Inter, JetBrains_Mono, Poppins } from 'next/font/google'
 import '@/styles/globals.css'
-import Navbar from '@/components/layout/Navbar'
-import Footer from '@/components/layout/Footer'
-import { AskTruEye } from '@/components/ui/AskTruEye'
+import SiteShell from '@/components/layout/SiteShell'
 
 const spaceGrotesk = Space_Grotesk({
   subsets: ['latin'],
@@ -138,10 +136,7 @@ export default function RootLayout({
         />
       </head>
       <body className="bg-[#050A14] text-[#F0F4FF] font-inter antialiased">
-        <Navbar />
-        <main>{children}</main>
-        <Footer />
-        <AskTruEye />
+        <SiteShell>{children}</SiteShell>
       </body>
     </html>
   )

@@ -76,18 +76,25 @@ export default function BlogPage() {
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-7">
               {posts.map((post) => (
                 <article key={post.slug} className="glass-card-cyan rounded-2xl overflow-hidden hover:-translate-y-1 transition-all duration-300 flex flex-col">
-                  {/* Cover image placeholder */}
+                  {/* Cover image */}
                   <div className="h-44 bg-gradient-to-br from-[#0D1F3C] to-[#050A14] relative overflow-hidden">
-                    <div
-                      className="absolute inset-0 opacity-10"
-                      style={{
-                        backgroundImage: 'linear-gradient(rgba(0,212,255,0.4) 1px, transparent 1px), linear-gradient(90deg, rgba(0,212,255,0.4) 1px, transparent 1px)',
-                        backgroundSize: '40px 40px',
-                      }}
-                    />
-                    <div className="absolute inset-0 flex items-center justify-center">
-                      <span className="text-4xl opacity-20">—</span>
-                    </div>
+                    {post.coverImage ? (
+                      // eslint-disable-next-line @next/next/no-img-element
+                      <img src={post.coverImage} alt={post.title} className="w-full h-full object-cover" />
+                    ) : (
+                      <>
+                        <div
+                          className="absolute inset-0 opacity-10"
+                          style={{
+                            backgroundImage: 'linear-gradient(rgba(0,212,255,0.4) 1px, transparent 1px), linear-gradient(90deg, rgba(0,212,255,0.4) 1px, transparent 1px)',
+                            backgroundSize: '40px 40px',
+                          }}
+                        />
+                        <div className="absolute inset-0 flex items-center justify-center">
+                          <span className="text-4xl opacity-20">—</span>
+                        </div>
+                      </>
+                    )}
                   </div>
                   <div className="p-6 flex flex-col flex-1">
                     <div className="flex items-center gap-2 mb-3">

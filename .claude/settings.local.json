@@ -2,7 +2,9 @@
   "permissions": {
     "allow": [
       "PowerShell(Get-ChildItem \"C:\\\\Users\\\\nehal.khan\\\\Desktop\\\\trueye\" -ErrorAction SilentlyContinue; if \\(-not \\(Test-Path \"C:\\\\Users\\\\nehal.khan\\\\Desktop\\\\trueye\"\\)\\) { Write-Host \"Directory does not exist\" } else { Write-Host \"Directory exists\" })",
-      "mcp__Claude_Preview__preview_start"
+      "mcp__Claude_Preview__preview_start",
+      "Bash(npm run *)",
+      "WebFetch(domain:www.trueye.io)"
     ]
   }
 }

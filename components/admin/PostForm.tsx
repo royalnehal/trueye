@@ -1,8 +1,8 @@
 'use client'
 
-import { useMemo, useState, type FormEvent } from 'react'
+import { useMemo, useRef, useState, type FormEvent } from 'react'
 import { useRouter } from 'next/navigation'
-import { Eye, Pencil } from 'lucide-react'
+import { Eye, Pencil, Upload, X } from 'lucide-react'
 import { markdownToHtml } from '@/lib/markdown'
 import { slugify } from '@/lib/utils'
 import type { BlogPost } from '@/lib/blog'
@@ -33,6 +33,10 @@ export default function PostForm({ post }: PostFormProps) {
   const [date, setDate] = useState(post?.date ?? new Date().toISOString().split('T')[0])
   const [author, setAuthor] = useState(post?.author ?? 'TruEye Team')
   const [category, setCategory] = useState(post?.category ?? CATEGORIES[0])
+  const [coverImage, setCoverImage] = useState(post?.coverImage ?? '')
+  const [uploading, setUploading] = useState(false)
+  const [uploadError, setUploadError] = useState('')
+  const fileInputRef = useRef<HTMLInputElement>(null)
   const [content, setContent] = useState(post?.content ?? '')
   const [slugTouched, setSlugTouched] = useState(isEditing)
   const [tab, setTab] = useState<'edit' | 'preview'>('edit')
@@ -48,12 +52,27 @@ export default function PostForm({ post }: PostFormProps) {
     }
   }
 
+  async function handleImageUpload(file: File) {
+    setUploadError('')
+    setUploading(true)
+    const form = new FormData()
+    form.append('file', file)
+    const res = await fetch('/api/admin/upload', { method: 'POST', body: form })
+    const data = await res.json()
+    setUploading(false)
+    if (!res.ok) {
+      setUploadError(data.error || 'Upload failed.')
+      return
+    }
+    setCoverImage(data.url)
+  }
+
   async function handleSubmit(e: FormEvent) {
     e.preventDefault()
     setError('')
     setSaving(true)
 
-    const payload = { title, slug, description, date, author, category, content }
+    const payload = { title, slug, description, date, author, category, coverImage, content }
     const url = isEditing ? `/api/admin/posts/${post!.slug}` : '/api/admin/posts'
     const method = isEditing ? 'PUT' : 'POST'
 
@@ -152,6 +171,61 @@ export default function PostForm({ post }: PostFormProps) {
             required
             className="w-full px-4 py-2.5 rounded-lg bg-white/5 border border-white/10 text-[#F0F4FF] text-sm focus:outline-none focus:border-[#00D4FF]/50 transition-colors"
           />
+        </div>
+
+        <div className="md:col-span-2">
+          <label className="block text-xs font-medium text-[#6B7FA3] mb-2">Featured Image</label>
+          <input
+            ref={fileInputRef}
+            type="file"
+            accept="image/jpeg,image/png,image/webp,image/gif,image/svg+xml"
+            className="hidden"
+            onChange={(e) => {
+              const file = e.target.files?.[0]
+              if (file) handleImageUpload(file)
+            }}
+          />
+          {coverImage ? (
+            <div className="relative rounded-xl overflow-hidden border border-white/10 h-48 group">
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img src={coverImage} alt="Featured image" className="w-full h-full object-cover" />
+              <div className="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center gap-3">
+                <button
+                  type="button"
+                  onClick={() => fileInputRef.current?.click()}
+                  className="inline-flex items-center gap-2 px-4 py-2 bg-[#00D4FF] text-black text-xs font-semibold rounded-full hover:scale-105 transition-all"
+                >
+                  <Upload size={13} /> Replace
+                </button>
+                <button
+                  type="button"
+                  onClick={() => { setCoverImage(''); if (fileInputRef.current) fileInputRef.current.value = '' }}
+                  className="inline-flex items-center gap-2 px-4 py-2 bg-red-500/80 text-white text-xs font-semibold rounded-full hover:scale-105 transition-all"
+                >
+                  <X size={13} /> Remove
+                </button>
+              </div>
+              {uploading && (
+                <div className="absolute inset-0 bg-black/70 flex items-center justify-center">
+                  <span className="text-[#00D4FF] text-sm">Uploading...</span>
+                </div>
+              )}
+            </div>
+          ) : (
+            <button
+              type="button"
+              onClick={() => fileInputRef.current?.click()}
+              disabled={uploading}
+              className="w-full h-36 rounded-xl border-2 border-dashed border-white/20 hover:border-[#00D4FF]/50 transition-colors flex flex-col items-center justify-center gap-2 text-[#6B7FA3] hover:text-[#00D4FF] disabled:opacity-60"
+            >
+              <Upload size={24} />
+              <span className="text-sm font-medium">{uploading ? 'Uploading...' : 'Click to upload image'}</span>
+              <span className="text-xs opacity-60">JPEG, PNG, WebP, GIF — max 5MB</span>
+            </button>
+          )}
+          {uploadError && (
+            <p className="mt-2 text-xs text-red-400">{uploadError}</p>
+          )}
         </div>
       </div>
 

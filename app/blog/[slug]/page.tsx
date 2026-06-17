@@ -117,16 +117,23 @@ export default function BlogPostPage({ params }: Props) {
 
           {/* Cover */}
           <div className="h-56 rounded-2xl bg-gradient-to-br from-[#0D1F3C] to-[#050A14] border border-white/10 mb-10 relative overflow-hidden">
-            <div
-              className="absolute inset-0 opacity-10"
-              style={{
-                backgroundImage: 'linear-gradient(rgba(0,212,255,0.4) 1px, transparent 1px), linear-gradient(90deg, rgba(0,212,255,0.4) 1px, transparent 1px)',
-                backgroundSize: '40px 40px',
-              }}
-            />
-            <div className="absolute inset-0 flex items-center justify-center">
-              <span className="text-8xl opacity-10 text-[#00D4FF]">◉</span>
-            </div>
+            {post.coverImage ? (
+              // eslint-disable-next-line @next/next/no-img-element
+              <img src={post.coverImage} alt={post.title} className="w-full h-full object-cover" />
+            ) : (
+              <>
+                <div
+                  className="absolute inset-0 opacity-10"
+                  style={{
+                    backgroundImage: 'linear-gradient(rgba(0,212,255,0.4) 1px, transparent 1px), linear-gradient(90deg, rgba(0,212,255,0.4) 1px, transparent 1px)',
+                    backgroundSize: '40px 40px',
+                  }}
+                />
+                <div className="absolute inset-0 flex items-center justify-center">
+                  <span className="text-8xl opacity-10 text-[#00D4FF]">◉</span>
+                </div>
+              </>
+            )}
           </div>
 
           {/* MDX Content */}
