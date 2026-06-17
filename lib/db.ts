@@ -7,9 +7,7 @@ export const dbAvailable = Boolean(process.env.DATABASE_URL)
 function getPrisma(): PrismaClient {
   if (!dbAvailable) throw new Error('DATABASE_URL is not set')
   if (!globalForPrisma.prisma) {
-    globalForPrisma.prisma = new PrismaClient({
-      datasources: { db: { url: process.env.DATABASE_URL } },
-    })
+    globalForPrisma.prisma = new PrismaClient()
   }
   return globalForPrisma.prisma
 }
