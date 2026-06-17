@@ -2,9 +2,9 @@ import type { Metadata } from 'next'
 import { Download, BookOpen, FileText } from 'lucide-react'
 
 export const metadata: Metadata = {
-  title: 'TruEye Resources — Documentation, Guides & Downloads',
+  title: 'TruEye Resources: Guides for Platform Success',
   description:
-    'Access TruEye documentation, download the Prime Guide eBook, and get the full product presentation. Everything you need to evaluate and deploy TruEye.',
+    "Explore TruEye's resources for insightful practical guides on leveraging the TruEye platform to achieve your goals. Start maximizing your success today!",
   alternates: {
     canonical: 'https://www.trueye.io/resources',
     languages: { en: 'https://www.trueye.io/resources', 'en-IN': 'https://www.trueye.io/resources' },

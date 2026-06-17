@@ -5,9 +5,9 @@ import { GlowDivider } from '@/components/ui/GlowDivider'
 import ProductClient from './ProductClient'
 
 export const metadata: Metadata = {
-  title: 'TruEye Product — Intrusion Detection, Face Recognition, Heat Maps & 47 More AI Modules',
+  title: 'TruEye Product Details: Features & Benefits Overview',
   description:
-    'Explore TruEye\'s full AI analytics platform: 19+ production modules including intrusion detection, crowd monitoring, safety gear compliance, heat maps, vehicle tracking, and machine efficiency. Works with any CCTV.',
+    'Learn about the TruEye platform\'s features and benefits. Discover how our product can enhance your business with cutting-edge technology and innovative solutions.',
   alternates: {
     canonical: 'https://www.trueye.io/product',
     languages: { en: 'https://www.trueye.io/product', 'en-IN': 'https://www.trueye.io/product' },

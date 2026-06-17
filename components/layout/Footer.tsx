@@ -1,3 +1,4 @@
+import Image from 'next/image'
 import Link from 'next/link'
 import { Linkedin, Instagram, Facebook, Twitter, Youtube, Mail, Phone } from 'lucide-react'
 import { BRAND, FOOTER_LINKS } from '@/lib/data'
@@ -11,14 +12,8 @@ export default function Footer() {
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10 mb-12">
           {/* Col 1: Brand */}
           <div>
-            <Link href="/" className="flex items-center gap-2.5 mb-4">
-              <svg width="32" height="32" viewBox="0 0 38 38" fill="none">
-                <circle cx="19" cy="19" r="17" stroke="#00D4FF" strokeWidth="1.5" />
-                <circle cx="19" cy="19" r="11" stroke="#00D4FF" strokeWidth="1" strokeDasharray="3 2" opacity="0.5" />
-                <circle cx="19" cy="19" r="6" fill="#00D4FF" opacity="0.9" />
-                <circle cx="19" cy="19" r="3" fill="#050A14" />
-              </svg>
-              <span className="font-poppins font-bold text-xl text-white">TruEye</span>
+            <Link href="/" className="flex items-center mb-4">
+              <Image src="/images/logo-white.webp" alt="TruEye" width={128} height={26} className="h-8 w-auto" />
             </Link>
             <p className="text-[#6B7FA3] text-sm leading-relaxed mb-6">
               A Video Analytics Solution by{' '}

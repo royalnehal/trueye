@@ -40,21 +40,16 @@ const poppins = Poppins({
 export const metadata: Metadata = {
   metadataBase: new URL('https://www.trueye.io'),
   title: {
-    default: 'TruEye — AI Video Analytics Solution | 50+ Modules | VertexPlus',
+    default: 'TruEye -  Video Analytics Solution by VertexPlus',
     template: '%s | TruEye',
   },
   description:
-    'TruEye by VertexPlus Technologies is an enterprise video analytics platform with 50+ AI modules. Convert CCTV footage into real-time intelligence for security, safety, and operations.',
+    'TruEye by VertexPlus Technologies is a video analytics solution that helps users extract valuable insights from their video surveillance content',
   keywords: [
-    'video analytics',
-    'AI video analytics',
-    'video analytics solution',
-    'video analytics software',
-    'video analytics platform',
-    'CCTV analytics',
-    'surveillance AI',
     'TruEye',
-    'VertexPlus Technologies',
+    'Video Analytics Solution',
+    'Video Analytics software',
+    'video analytics',
   ],
   authors: [{ name: 'VertexPlus Technologies Limited' }],
   creator: 'VertexPlus Technologies Limited',
@@ -98,6 +93,10 @@ const organizationSchema = {
   telephone: '+919660326000',
   address: {
     '@type': 'PostalAddress',
+    streetAddress: 'B-19, 10-B Scheme, Gopalpura Road',
+    addressLocality: 'Jaipur',
+    addressRegion: 'Rajasthan',
+    postalCode: '302018',
     addressCountry: 'IN',
   },
   sameAs: [
@@ -126,10 +125,16 @@ export default function RootLayout({
       className={`${spaceGrotesk.variable} ${inter.variable} ${jetbrainsMono.variable} ${poppins.variable}`}
     >
       <head>
-        <meta name="msvalidate.01" content="BING_WEBMASTER_CODE" />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationSchema) }}
+        />
+        {/* Google Analytics */}
+        <script async src="https://www.googletagmanager.com/gtag/js?id=G-17E53PEFWX" />
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date());gtag('config','G-17E53PEFWX');`,
+          }}
         />
       </head>
       <body className="bg-[#050A14] text-[#F0F4FF] font-inter antialiased">
@@ -137,8 +142,6 @@ export default function RootLayout({
         <main>{children}</main>
         <Footer />
         <AskTruEye />
-        {/* Google Analytics placeholder */}
-        {/* <Script src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX" strategy="lazyOnload" /> */}
       </body>
     </html>
   )

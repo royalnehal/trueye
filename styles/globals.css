@@ -216,3 +216,41 @@ a {
 .mdx-content pre { background: rgba(0,0,0,0.4); border: 1px solid rgba(0,212,255,0.15); border-radius: 0.5rem; padding: 1.25rem; overflow-x: auto; margin: 1.5rem 0; }
 .mdx-content pre code { background: none; padding: 0; color: #F0F4FF; }
 .mdx-content hr { border: none; border-top: 1px solid rgba(255,255,255,0.1); margin: 2rem 0; }
+.mdx-content h4 { font-family: var(--font-space-grotesk), sans-serif; font-size: 1.05rem; font-weight: 600; margin-top: 1.5rem; margin-bottom: 0.5rem; color: #F0F4FF; }
+.mdx-content img { max-width: 100%; border-radius: 0.5rem; margin: 1.5rem 0; }
+
+/* Rich text editor (Tiptap) */
+.mdx-content.ProseMirror {
+  color: #6B7FA3;
+}
+.mdx-content.ProseMirror p.is-editor-empty:first-child::before {
+  content: attr(data-placeholder);
+  color: #6B7FA3;
+  opacity: 0.6;
+  float: left;
+  height: 0;
+  pointer-events: none;
+}
+.mdx-content.ProseMirror table {
+  overflow: hidden;
+}
+.mdx-content.ProseMirror td, .mdx-content.ProseMirror th {
+  position: relative;
+  border: 1px solid rgba(255,255,255,0.1);
+}
+.mdx-content.ProseMirror .selectedCell::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: rgba(0,212,255,0.1);
+  pointer-events: none;
+}
+.mdx-content.ProseMirror .column-resize-handle {
+  position: absolute;
+  right: -2px;
+  top: 0;
+  bottom: 0;
+  width: 4px;
+  background-color: #00D4FF;
+  pointer-events: none;
+}

@@ -1,6 +1,14 @@
 import { MetadataRoute } from 'next'
+import { getAllPosts } from '@/lib/blog'
 
 export default function sitemap(): MetadataRoute.Sitemap {
+  const blogPosts: MetadataRoute.Sitemap = getAllPosts().map((post) => ({
+    url: `https://www.trueye.io/blog/${post.slug}`,
+    lastModified: new Date(post.date),
+    changeFrequency: 'monthly',
+    priority: 0.75,
+  }))
+
   return [
     {
       url: 'https://www.trueye.io',
@@ -26,36 +34,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: 'weekly',
       priority: 0.8,
     },
-    {
-      url: 'https://www.trueye.io/blog/what-is-video-analytics',
-      lastModified: new Date(),
-      changeFrequency: 'monthly',
-      priority: 0.75,
-    },
-    {
-      url: 'https://www.trueye.io/blog/video-analytics-manufacturing',
-      lastModified: new Date(),
-      changeFrequency: 'monthly',
-      priority: 0.75,
-    },
-    {
-      url: 'https://www.trueye.io/blog/ai-vs-manual-monitoring',
-      lastModified: new Date(),
-      changeFrequency: 'monthly',
-      priority: 0.75,
-    },
-    {
-      url: 'https://www.trueye.io/blog/how-to-choose-video-analytics-software',
-      lastModified: new Date(),
-      changeFrequency: 'monthly',
-      priority: 0.75,
-    },
-    {
-      url: 'https://www.trueye.io/blog/video-analytics-retail-security',
-      lastModified: new Date(),
-      changeFrequency: 'monthly',
-      priority: 0.75,
-    },
+    ...blogPosts,
     {
       url: 'https://www.trueye.io/pricing',
       lastModified: new Date(),

@@ -3,9 +3,9 @@ import { Download, Shield, HardHat, Package } from 'lucide-react'
 import { CASE_STUDIES } from '@/lib/data'
 
 export const metadata: Metadata = {
-  title: 'TruEye Case Studies — Video Analytics Deployments That Delivered Results',
+  title: 'TruEye Case Studies',
   description:
-    'Read how TruEye solved theft control, workplace safety monitoring, and inventory counting challenges. Download full PDF case studies.',
+    "Explore TruEye's resources for insightful case studies and practical guides on leveraging the TruEye platform to achieve your goals. Start maximizing your success today!",
   alternates: {
     canonical: 'https://www.trueye.io/case-studies',
     languages: { en: 'https://www.trueye.io/case-studies', 'en-IN': 'https://www.trueye.io/case-studies' },

@@ -2,9 +2,9 @@ import type { Metadata } from 'next'
 import PartnerForm from './PartnerForm'
 
 export const metadata: Metadata = {
-  title: 'Partner With TruEye — Grow Your Business With AI Video Analytics',
+  title: 'TruEye Become a Partner',
   description:
-    "Join TruEye's partner program as a reseller, technology partner, VMS integrator, or distributor. Access world-class AI video analytics to expand your offering.",
+    'Expand your reach with TruEye. Partner with us to enhance video surveillance offerings and gain competitive advantage in the market.',
   alternates: {
     canonical: 'https://www.trueye.io/becomeapartner',
     languages: { en: 'https://www.trueye.io/becomeapartner', 'en-IN': 'https://www.trueye.io/becomeapartner' },

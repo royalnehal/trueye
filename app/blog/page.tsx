@@ -6,9 +6,8 @@ import { formatDate } from '@/lib/utils'
 import { Badge } from '@/components/ui/Badge'
 
 export const metadata: Metadata = {
-  title: 'Video Analytics Blog — Insights, Guides & Industry News | TruEye',
-  description:
-    'Video analytics insights, deployment guides, industry research, and AI surveillance news from the TruEye team at VertexPlus Technologies.',
+  title: 'TruEye Blog',
+  description: 'Video analytics insights, deployment guides, industry research, and AI surveillance news from the TruEye team at VertexPlus Technologies.',
   alternates: {
     canonical: 'https://www.trueye.io/blog',
     languages: { en: 'https://www.trueye.io/blog', 'en-IN': 'https://www.trueye.io/blog' },

@@ -1,12 +1,11 @@
 import type { Metadata } from 'next'
-import { Mail, Phone, Linkedin, Instagram, Facebook, Twitter, Youtube } from 'lucide-react'
+import { Mail, Phone, MapPin, Linkedin, Instagram, Facebook, Twitter, Youtube } from 'lucide-react'
 import { BRAND } from '@/lib/data'
 import ContactForm from './ContactForm'
 
 export const metadata: Metadata = {
-  title: 'Contact TruEye — Speak to a Video Analytics Expert',
-  description:
-    'Get in touch with the TruEye team for sales enquiries, product demos, partnerships, or general questions about AI video analytics.',
+  title: 'TruEye Contact',
+  description: 'Get in touch with the TruEye team for sales enquiries, product demos, partnerships, or general questions about AI video analytics.',
   alternates: {
     canonical: 'https://www.trueye.io/contact',
     languages: { en: 'https://www.trueye.io/contact', 'en-IN': 'https://www.trueye.io/contact' },
@@ -74,12 +73,30 @@ export default function ContactPage() {
                     <p className="text-sm text-[#F0F4FF]">{BRAND.email.general}</p>
                   </div>
                 </a>
+                <a href={`tel:${BRAND.phone.sales.replace(/\s/g, '')}`} className="flex items-center gap-3 text-[#6B7FA3] hover:text-[#00D4FF] transition-colors">
+                  <div className="w-10 h-10 rounded-xl bg-[#00D4FF]/10 flex items-center justify-center">
+                    <Phone size={18} className="text-[#00D4FF]" />
+                  </div>
+                  <div>
+                    <p className="text-xs text-[#6B7FA3]/60 mb-0.5">Sales Phone</p>
+                    <p className="text-sm text-[#F0F4FF]">{BRAND.phone.sales}</p>
+                  </div>
+                </a>
+                <a href={`tel:${BRAND.phone.general.replace(/\s/g, '')}`} className="flex items-center gap-3 text-[#6B7FA3] hover:text-[#00D4FF] transition-colors">
+                  <div className="w-10 h-10 rounded-xl bg-[#00D4FF]/10 flex items-center justify-center">
+                    <Phone size={18} className="text-[#00D4FF]" />
+                  </div>
+                  <div>
+                    <p className="text-xs text-[#6B7FA3]/60 mb-0.5">General Phone</p>
+                    <p className="text-sm text-[#F0F4FF]">{BRAND.phone.general}</p>
+                  </div>
+                </a>
                 <a href={`tel:${BRAND.phone.primary.replace(/\s/g, '')}`} className="flex items-center gap-3 text-[#6B7FA3] hover:text-[#00D4FF] transition-colors">
                   <div className="w-10 h-10 rounded-xl bg-[#00D4FF]/10 flex items-center justify-center">
                     <Phone size={18} className="text-[#00D4FF]" />
                   </div>
                   <div>
-                    <p className="text-xs text-[#6B7FA3]/60 mb-0.5">Phone</p>
+                    <p className="text-xs text-[#6B7FA3]/60 mb-0.5">Main Line</p>
                     <p className="text-sm text-[#F0F4FF]">{BRAND.phone.primary}</p>
                   </div>
                 </a>
@@ -115,6 +132,29 @@ export default function ContactPage() {
               <h2 className="font-poppins font-bold text-xl text-[#F0F4FF] mb-5">Send a Message</h2>
               <ContactForm />
             </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Global Offices */}
+      <section className="py-16 bg-[#0A1628]">
+        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+          <h2 className="font-poppins font-bold text-2xl text-[#F0F4FF] mb-2 text-center">Global Offices</h2>
+          <p className="text-[#6B7FA3] text-sm text-center mb-10">VertexPlus Technologies Limited — Worldwide presence</p>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+            {BRAND.offices.map((office) => (
+              <div key={office.city} className="glass-card p-5 rounded-xl">
+                <div className="flex items-center gap-2 mb-3">
+                  <MapPin size={15} className="text-[#00D4FF] shrink-0" />
+                  <p className="font-poppins font-semibold text-sm text-[#F0F4FF]">
+                    {office.city}, <span className="text-[#6B7FA3] font-normal">{office.country}</span>
+                  </p>
+                </div>
+                <p className="text-xs text-[#6B7FA3] leading-relaxed mb-2">{office.address}</p>
+                <a href={`tel:${office.phone.replace(/[\s/]/g, '')}`} className="text-xs text-[#00D4FF] hover:underline block">{office.phone}</a>
+                <a href={`mailto:${office.email}`} className="text-xs text-[#6B7FA3] hover:text-[#00D4FF] transition-colors">{office.email}</a>
+              </div>
+            ))}
           </div>
         </div>
       </section>

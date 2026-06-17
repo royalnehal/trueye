@@ -11,15 +11,67 @@ export const BRAND = {
   },
   phone: {
     primary: '+91 966 032 6000',
-    secondary: '+91 723 002 7503',
+    sales: '+91 723 002 7503',
+    general: '+91 723 088 9911',
   },
   social: {
-    linkedin: 'https://linkedin.com/company/vertexplustrueye',
-    instagram: 'https://instagram.com/vertexplustrueye',
-    facebook: 'https://facebook.com/vertexplustrueye',
+    linkedin: 'https://www.linkedin.com/company/vertexplustrueye/',
+    instagram: 'https://www.instagram.com/vertexplustrueye',
+    facebook: 'https://www.facebook.com/vertexplustrueye/',
     twitter: 'https://x.com/trueyeworld',
-    youtube: 'https://youtube.com/@vertexplustrueye',
+    youtube: 'https://www.youtube.com/@vertexplustrueye',
   },
+  offices: [
+    {
+      city: 'Jaipur',
+      country: 'India',
+      address: 'B-19, 10-B Scheme, Gopalpura Road, Jaipur, Rajasthan 302018',
+      phone: '+91 141 6622200/02',
+      email: 'info@vertexplus.com',
+    },
+    {
+      city: 'Noida',
+      country: 'India',
+      address: 'C-56/45, 2 & 3 Floor, Sector-62, Noida, Uttar Pradesh 201301',
+      phone: '+91 141 6622200/02',
+      email: 'info@vertexplus.com',
+    },
+    {
+      city: 'Georgia',
+      country: 'USA',
+      address: '5070 Jonquilla Dr, Alpharetta, Georgia 30004',
+      phone: '+1 561 990 1920',
+      email: 'us@vertexplus.com',
+    },
+    {
+      city: 'Dubai',
+      country: 'UAE',
+      address: 'E 109, East Wing-1, Dubai Airport Freezone',
+      phone: '371909',
+      email: 'uae@vertexplus.com',
+    },
+    {
+      city: 'Vancouver',
+      country: 'Canada',
+      address: '201-110 Cambie Street, Vancouver BC V6B 2M8',
+      phone: '+1 770 400 9545',
+      email: 'canada@vertexplus.com',
+    },
+    {
+      city: 'Singapore',
+      country: 'Singapore',
+      address: '3 Shenton Way, #09-07 Shenton House, Singapore 068805',
+      phone: '+65 9188 0705',
+      email: 'singapore@vertexplus.com',
+    },
+    {
+      city: 'Kuala Lumpur',
+      country: 'Malaysia',
+      address: 'Suite 1705A, Level 17, Menara Landmark 12 Jalan Ngee Heng, 80000 Johor Bahru, Johor',
+      phone: '+601 6296 2700',
+      email: 'malaysia@vertexplus.com',
+    },
+  ],
 }
 
 export const GEO_ENTITY_PARAGRAPH =

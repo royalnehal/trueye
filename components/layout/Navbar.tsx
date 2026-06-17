@@ -1,45 +1,13 @@
 'use client'
 
 import { useState, useEffect, useRef } from 'react'
+import Image from 'next/image'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { motion, AnimatePresence } from 'framer-motion'
 import { Menu, X, ChevronDown, Phone } from 'lucide-react'
 import { NAV_LINKS, BRAND } from '@/lib/data'
 import { cn } from '@/lib/utils'
-
-function TruEyeLogo({ size = 'md' }: { size?: 'sm' | 'md' }) {
-  const w = size === 'sm' ? 108 : 128
-  const h = size === 'sm' ? 26 : 30
-  return (
-    <svg width={w} height={h} viewBox="0 0 220 46" fill="none" aria-label="TruEye" className="transition-all duration-300">
-      {/* TRU — white */}
-      <text x="2" y="37" fontFamily="'Arial Black', Arial, sans-serif" fontWeight="900" fontSize="38" fill="#F0F4FF" letterSpacing="-1">TRU</text>
-      {/* Backward-E (Ǝ) — red */}
-      <g transform="translate(100,2)">
-        <rect x="10" y="0" width="10" height="34" fill="#CC1111" />
-        <rect x="0" y="0" width="30" height="10" fill="#CC1111" />
-        <rect x="4" y="12" width="22" height="10" fill="#CC1111" />
-        <rect x="0" y="24" width="30" height="10" fill="#CC1111" />
-      </g>
-      {/* Y — red, chevron style */}
-      <g transform="translate(134,2)">
-        <polygon points="0,0 12,0 20,18 8,18" fill="#CC1111" />
-        <polygon points="40,0 28,0 20,18 32,18" fill="#CC1111" />
-        <rect x="14" y="17" width="12" height="17" fill="#CC1111" />
-      </g>
-      {/* E — red */}
-      <g transform="translate(178,2)">
-        <rect x="0" y="0" width="10" height="34" fill="#CC1111" />
-        <rect x="0" y="0" width="28" height="10" fill="#CC1111" />
-        <rect x="0" y="12" width="22" height="10" fill="#CC1111" />
-        <rect x="0" y="24" width="28" height="10" fill="#CC1111" />
-      </g>
-      {/* ™ */}
-      <text x="208" y="10" fontFamily="Arial, sans-serif" fontSize="10" fill="#F0F4FF" opacity="0.6">TM</text>
-    </svg>
-  )
-}
 
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false)
@@ -81,7 +49,14 @@ export default function Navbar() {
         <nav className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-full flex items-center justify-between">
           {/* Logo */}
           <Link href="/" className="flex items-center group" aria-label="TruEye Home">
-            <TruEyeLogo size={scrolled ? 'sm' : 'md'} />
+            <Image
+              src="/images/logo-white.webp"
+              alt="TruEye"
+              width={128}
+              height={26}
+              priority
+              className={cn('w-auto transition-all duration-300', scrolled ? 'h-6' : 'h-8')}
+            />
           </Link>
 
           {/* Desktop nav */}
@@ -185,7 +160,7 @@ export default function Navbar() {
             {/* Close button */}
             <div className="flex items-center justify-between px-6 py-6">
               <Link href="/" className="flex items-center" onClick={() => setMobileOpen(false)}>
-                <TruEyeLogo size="sm" />
+                <Image src="/images/logo-white.webp" alt="TruEye" width={108} height={22} className="h-6 w-auto" />
               </Link>
               <button
                 onClick={() => setMobileOpen(false)}

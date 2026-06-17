@@ -3,9 +3,9 @@ import PricingClient from './PricingClient'
 import { PRICING_TABS } from '@/lib/data'
 
 export const metadata: Metadata = {
-  title: 'Video Analytics Pricing — Custom Plans for Every Scale',
+  title: 'TruEye Pricing: Discover Affordable Plans for Every Need',
   description:
-    'TruEye pricing is customized to your deployment needs. Understand hardware, network, deployment model, and integration factors. Contact us for a quote.',
+    'Find detailed pricing information for TruEye platform. Choose the perfect plan for your needs and budget, with transparent costs and no hidden fees. Start now!',
   alternates: {
     canonical: 'https://www.trueye.io/pricing',
     languages: { en: 'https://www.trueye.io/pricing', 'en-IN': 'https://www.trueye.io/pricing' },
