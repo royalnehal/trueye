@@ -25,7 +25,7 @@ export async function PUT(request: Request, { params }: Params) {
   }
 
   const body = await request.json()
-  const { title, description, date, author, category, content, slug: providedSlug } = body
+  const { title, description, date, author, category, coverImage, content, slug: providedSlug } = body
 
   if (!title || !content) {
     return NextResponse.json({ error: 'Title and content are required' }, { status: 400 })
@@ -41,13 +41,14 @@ export async function PUT(request: Request, { params }: Params) {
     return NextResponse.json({ error: 'A post with this slug already exists' }, { status: 409 })
   }
 
-  const frontmatter = {
+  const frontmatter: Record<string, string> = {
     title,
     description: description || '',
     date: date || new Date().toISOString().split('T')[0],
     author: author || 'TruEye Team',
     category: category || 'Video Analytics',
   }
+  if (coverImage) frontmatter.coverImage = coverImage
 
   const fileContents = matter.stringify(content, frontmatter)
 

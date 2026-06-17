@@ -1,0 +1,151 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model BlogPost {
+  id          Int      @id @default(autoincrement())
+  slug        String   @unique
+  title       String
+  description String
+  content     String
+  date        String
+  author      String   @default("TruEye Team")
+  category    String   @default("Video Analytics")
+  coverImage  String?
+  published   Boolean  @default(true)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+model SiteSetting {
+  id    Int    @id @default(autoincrement())
+  key   String @unique
+  value String
+}
+
+model Office {
+  id      Int    @id @default(autoincrement())
+  city    String
+  country String
+  address String
+  phone   String
+  email   String
+  order   Int    @default(0)
+}
+
+model Stat {
+  id     Int     @id @default(autoincrement())
+  value  Int
+  suffix String
+  prefix String  @default("")
+  label  String
+  mono   Boolean @default(true)
+  order  Int     @default(0)
+}
+
+model UseCase {
+  id          Int    @id @default(autoincrement())
+  title       String
+  description String
+  icon        String
+  order       Int    @default(0)
+}
+
+model AiModule {
+  id          Int    @id @default(autoincrement())
+  name        String
+  description String
+  order       Int    @default(0)
+}
+
+model Benefit {
+  id          Int    @id @default(autoincrement())
+  icon        String
+  stat        String
+  label       String
+  description String
+  order       Int    @default(0)
+}
+
+model Industry {
+  id    Int    @id @default(autoincrement())
+  name  String
+  icon  String
+  order Int    @default(0)
+}
+
+model CaseStudy {
+  id        Int    @id @default(autoincrement())
+  title     String
+  icon      String
+  challenge String
+  solution  String
+  result    String
+  pdf       String @default("")
+  order     Int    @default(0)
+}
+
+model ComparisonRow {
+  id     Int    @id @default(autoincrement())
+  factor String
+  manual String
+  trueye String
+  order  Int    @default(0)
+}
+
+model Faq {
+  id       Int    @id @default(autoincrement())
+  question String
+  answer   String
+  page     String @default("homepage")
+  order    Int    @default(0)
+}
+
+model PricingTab {
+  id    Int    @id @default(autoincrement())
+  icon  String
+  title String
+  body  String
+  order Int    @default(0)
+}
+
+model NavLink {
+  id       Int           @id @default(autoincrement())
+  label    String
+  href     String
+  order    Int           @default(0)
+  dropdown NavDropdown[]
+}
+
+model NavDropdown {
+  id        Int     @id @default(autoincrement())
+  label     String
+  href      String
+  order     Int     @default(0)
+  navLinkId Int
+  navLink   NavLink @relation(fields: [navLinkId], references: [id], onDelete: Cascade)
+}
+
+model FooterLink {
+  id       Int     @id @default(autoincrement())
+  column   String
+  label    String
+  href     String
+  external Boolean @default(false)
+  order    Int     @default(0)
+}
+
+model Testimonial {
+  id       Int    @id @default(autoincrement())
+  name     String
+  role     String
+  company  String
+  quote    String
+  initials String
+  order    Int    @default(0)
+}
