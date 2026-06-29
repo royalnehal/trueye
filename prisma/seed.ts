@@ -3,6 +3,20 @@ import fs from 'fs'
 import path from 'path'
 import matter from 'gray-matter'
 
+// Load .env.local so DATABASE_URL is available when running via ts-node
+const envFile = path.join(process.cwd(), '.env.local')
+if (fs.existsSync(envFile)) {
+  const lines = fs.readFileSync(envFile, 'utf-8').split('\n')
+  for (const line of lines) {
+    const m = line.match(/^([^#=]+)=(.*)$/)
+    if (m) {
+      const key = m[1].trim()
+      const val = m[2].trim().replace(/^["']|["']$/g, '')
+      if (!process.env[key]) process.env[key] = val
+    }
+  }
+}
+
 const prisma = new PrismaClient()
 
 async function main() {
