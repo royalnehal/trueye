@@ -16,6 +16,6 @@ export async function GET() {
 export async function POST(request: Request) {
   if (!dbAvailable) return NextResponse.json({ error: 'Database not configured' }, { status: 503 })
   const body = await request.json()
-  const module = await prisma.aiModule.create({ data: body })
-  return NextResponse.json(module, { status: 201 })
+  const aiModule = await prisma.aiModule.create({ data: body })
+  return NextResponse.json(aiModule, { status: 201 })
 }
