@@ -18,33 +18,59 @@ export async function POST(request: Request) {
     },
   })
 
+  const htmlBody = `
+    <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; color: #111827;">
+      <p>Dear Admin,</p>
+      <br/>
+      <p>Please find below the enquiry details:</p>
+      <br/>
+      <table style="width: 100%; border-collapse: collapse;">
+        <tr>
+          <td style="padding: 6px 0; color: #6b7280; width: 100px; vertical-align: top;">Name</td>
+          <td style="padding: 6px 0; font-weight: 600;">: &nbsp;${fullName}</td>
+        </tr>
+        <tr>
+          <td style="padding: 6px 0; color: #6b7280; vertical-align: top;">Email</td>
+          <td style="padding: 6px 0;">: &nbsp;<a href="mailto:${email}" style="color: #0066cc;">${email}</a></td>
+        </tr>
+        ${phone ? `
+        <tr>
+          <td style="padding: 6px 0; color: #6b7280; vertical-align: top;">Phone</td>
+          <td style="padding: 6px 0;">: &nbsp;${phone}</td>
+        </tr>` : ''}
+        ${company ? `
+        <tr>
+          <td style="padding: 6px 0; color: #6b7280; vertical-align: top;">Company</td>
+          <td style="padding: 6px 0;">: &nbsp;${company}</td>
+        </tr>` : ''}
+        <tr>
+          <td style="padding: 6px 0; color: #6b7280; vertical-align: top;">Message</td>
+          <td style="padding: 6px 0;">: &nbsp;${message.replace(/\n/g, '<br/>')}</td>
+        </tr>
+      </table>
+      <br/>
+      <p>Thanks,<br/><strong>${fullName}</strong></p>
+    </div>
+  `
+
+  const textBody = `Dear Admin,
+
+Please find below the enquiry details:
+
+Name    : ${fullName}
+Email   : ${email}${phone ? `\nPhone   : ${phone}` : ''}${company ? `\nCompany : ${company}` : ''}
+Message : ${message}
+
+Thanks,
+${fullName}`
+
   await transporter.sendMail({
-    from: `"${fullName}" <${process.env.SMTP_USER}>`,
-    replyTo: email,
+    from: `"${fullName}" <${email}>`,
     to: 'contact@trueye.io',
-    subject: `New Inquiry from ${fullName}${company ? ` (${company})` : ''}`,
-    html: `
-      <div style="font-family:Arial,sans-serif;max-width:600px;margin:0 auto;border:1px solid #e5e7eb;border-radius:8px;overflow:hidden;">
-        <div style="background:#0a1628;padding:24px 32px;">
-          <h2 style="color:#00D4FF;margin:0;font-size:20px;">New Contact Inquiry</h2>
-          <p style="color:#6B7FA3;margin:4px 0 0;font-size:13px;">from trueyeai.com contact form</p>
-        </div>
-        <div style="padding:32px;background:#ffffff;">
-          <table style="width:100%;border-collapse:collapse;">
-            <tr><td style="padding:8px 0;color:#6b7280;font-size:13px;width:120px;">Name</td><td style="padding:8px 0;font-weight:600;color:#111827;">${fullName}</td></tr>
-            <tr><td style="padding:8px 0;color:#6b7280;font-size:13px;">Email</td><td style="padding:8px 0;"><a href="mailto:${email}" style="color:#00D4FF;">${email}</a></td></tr>
-            ${phone ? `<tr><td style="padding:8px 0;color:#6b7280;font-size:13px;">Phone</td><td style="padding:8px 0;color:#111827;">${phone}</td></tr>` : ''}
-            ${company ? `<tr><td style="padding:8px 0;color:#6b7280;font-size:13px;">Company</td><td style="padding:8px 0;color:#111827;">${company}</td></tr>` : ''}
-          </table>
-          <hr style="border:none;border-top:1px solid #e5e7eb;margin:20px 0;" />
-          <p style="color:#6b7280;font-size:13px;margin:0 0 8px;">Message</p>
-          <p style="color:#111827;line-height:1.7;white-space:pre-wrap;margin:0;">${message}</p>
-        </div>
-        <div style="background:#f9fafb;padding:16px 32px;text-align:center;">
-          <p style="color:#9ca3af;font-size:12px;margin:0;">Reply to this email to respond directly to ${fullName}</p>
-        </div>
-      </div>
-    `,
+    cc: 'nehal.khan@vertexplus.com, anurag.jain@vertexplus.com',
+    subject: `Enquiry from ${fullName}${company ? ` — ${company}` : ''}`,
+    text: textBody,
+    html: htmlBody,
   })
 
   return NextResponse.json({ ok: true })
