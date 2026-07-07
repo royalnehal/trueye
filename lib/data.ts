@@ -10,7 +10,7 @@ export const BRAND = {
     general: 'contact@trueye.io',
   },
   phone: {
-    primary: '+91 966 032 6000',
+    primary: '+91 7230 926 926',
     sales: '+91 723 002 7503',
     general: '+91 723 088 9911',
   },
