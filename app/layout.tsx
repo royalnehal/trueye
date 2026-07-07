@@ -88,7 +88,7 @@ const organizationSchema = {
   description:
     'TruEye is an AI-powered video analytics solution with 50+ modules for intelligent surveillance, security automation, and operational intelligence.',
   email: 'contact@trueye.io',
-  telephone: '+919660326000',
+  telephone: '+917230926926',
   address: {
     '@type': 'PostalAddress',
     streetAddress: 'B-19, 10-B Scheme, Gopalpura Road',
@@ -106,7 +106,7 @@ const organizationSchema = {
   ],
   contactPoint: {
     '@type': 'ContactPoint',
-    telephone: '+919660326000',
+    telephone: '+917230926926',
     contactType: 'sales',
     email: 'sales@trueye.io',
   },

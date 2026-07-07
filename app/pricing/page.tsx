@@ -89,7 +89,7 @@ export default function PricingPage() {
               Get Your Personalised Quote
             </a>
             <a
-              href={`tel:+919660326000`}
+              href={`tel:+917230926926`}
               className="px-8 py-4 border border-[#00D4FF]/40 text-[#00D4FF] font-medium rounded-full hover:bg-[#00D4FF]/10 transition-all"
             >
               Talk to Us
