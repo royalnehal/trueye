@@ -42,8 +42,12 @@ export function DemoForm() {
   })
 
   const onSubmit = async (data: FormData) => {
-    await new Promise((r) => setTimeout(r, 1000))
-    console.log('Demo request:', data)
+    const res = await fetch('/api/demo', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(data),
+    })
+    if (!res.ok) throw new Error('Failed to send')
     setSubmitted(true)
   }
 
