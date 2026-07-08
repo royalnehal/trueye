@@ -4,7 +4,6 @@ import { useRouter } from 'next/navigation'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { z } from 'zod'
-import { CheckCircle } from 'lucide-react'
 import { cn } from '@/lib/utils'
 
 const schema = z.object({
@@ -30,16 +29,6 @@ export default function PartnerForm() {
   const onSubmit = async () => {
     await new Promise(r => setTimeout(r, 800))
     router.push('/thank-you')
-  }
-
-  if (submitted) {
-    return (
-      <div className="text-center py-8">
-        <CheckCircle className="text-[#00D4FF] mx-auto mb-3" size={40} />
-        <h3 className="font-poppins font-bold text-lg text-[#F0F4FF] mb-2">Application Submitted!</h3>
-        <p className="text-[#6B7FA3] text-sm">Our partnership team will contact you within 2 business days.</p>
-      </div>
-    )
   }
 
   return (
