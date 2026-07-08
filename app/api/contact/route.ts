@@ -69,7 +69,7 @@ ${fullName}`
     from: '"TruEye Website" <contact@trueye.io>',
     replyTo: `"${fullName}" <${email}>`,
     to: 'contact@trueye.io',
-    cc: 'nehal.khan@vertexplus.com, anurag.jain@vertexplus.com',
+    cc: 'info@vertexplus.com',
     subject: `Enquiry from ${fullName}${company ? ` — ${company}` : ''}`,
     text: textBody,
     html: htmlBody,
