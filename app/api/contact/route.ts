@@ -66,7 +66,8 @@ Thanks,
 ${fullName}`
 
   await transporter.sendMail({
-    from: `"${fullName}" <${email}>`,
+    from: '"TruEye Website" <contact@trueye.io>',
+    replyTo: `"${fullName}" <${email}>`,
     to: 'contact@trueye.io',
     cc: 'nehal.khan@vertexplus.com, anurag.jain@vertexplus.com',
     subject: `Enquiry from ${fullName}${company ? ` — ${company}` : ''}`,
