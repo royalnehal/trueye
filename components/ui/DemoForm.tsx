@@ -1,6 +1,7 @@
 'use client'
 
 import { useState } from 'react'
+import { useRouter } from 'next/navigation'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { z } from 'zod'
@@ -32,6 +33,7 @@ const errorClasses = 'text-red-400 text-xs mt-1'
 
 export function DemoForm() {
   const [submitted, setSubmitted] = useState(false)
+  const router = useRouter()
 
   const {
     register,
@@ -48,7 +50,7 @@ export function DemoForm() {
       body: JSON.stringify(data),
     })
     if (!res.ok) throw new Error('Failed to send')
-    setSubmitted(true)
+    router.push('/thank-you')
   }
 
   if (submitted) {

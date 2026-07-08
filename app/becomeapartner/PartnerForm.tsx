@@ -1,6 +1,7 @@
 'use client'
 
 import { useState } from 'react'
+import { useRouter } from 'next/navigation'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { z } from 'zod'
@@ -25,12 +26,12 @@ const errorClasses = 'text-red-400 text-xs mt-1'
 
 export default function PartnerForm() {
   const [submitted, setSubmitted] = useState(false)
+  const router = useRouter()
   const { register, handleSubmit, formState: { errors, isSubmitting } } = useForm<FormData>({ resolver: zodResolver(schema) })
 
   const onSubmit = async (data: FormData) => {
     await new Promise(r => setTimeout(r, 800))
-    console.log('Partner application:', data)
-    setSubmitted(true)
+    router.push('/thank-you')
   }
 
   if (submitted) {
