@@ -25,11 +25,10 @@ const inputClasses =
 const errorClasses = 'text-red-400 text-xs mt-1'
 
 export default function PartnerForm() {
-  const [submitted, setSubmitted] = useState(false)
   const router = useRouter()
   const { register, handleSubmit, formState: { errors, isSubmitting } } = useForm<FormData>({ resolver: zodResolver(schema) })
 
-  const onSubmit = async (data: FormData) => {
+  const onSubmit = async (_data: FormData) => {
     await new Promise(r => setTimeout(r, 800))
     router.push('/thank-you')
   }

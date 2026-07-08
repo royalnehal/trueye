@@ -32,7 +32,6 @@ const inputClasses =
 const errorClasses = 'text-red-400 text-xs mt-1'
 
 export function DemoForm() {
-  const [submitted, setSubmitted] = useState(false)
   const router = useRouter()
 
   const {

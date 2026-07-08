@@ -22,7 +22,6 @@ const inputClasses =
 const errorClasses = 'text-red-400 text-xs mt-1'
 
 export default function ContactForm() {
-  const [submitted, setSubmitted] = useState(false)
   const router = useRouter()
   const { register, handleSubmit, formState: { errors, isSubmitting } } = useForm<FormData>({ resolver: zodResolver(schema) })
 
