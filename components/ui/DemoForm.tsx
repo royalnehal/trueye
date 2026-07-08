@@ -4,7 +4,6 @@ import { useRouter } from 'next/navigation'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { z } from 'zod'
-import { CheckCircle } from 'lucide-react'
 import { Button } from '@/components/ui/Button'
 import { COUNTRIES, INDUSTRIES_LIST, BUSINESS_TYPES } from '@/lib/data'
 import { cn } from '@/lib/utils'
@@ -51,21 +50,7 @@ export function DemoForm() {
     router.push('/thank-you')
   }
 
-  if (submitted) {
-    return (
-      <div className="text-center py-12">
-        <div className="w-16 h-16 rounded-full bg-[#00D4FF]/10 border border-[#00D4FF]/30 flex items-center justify-center mx-auto mb-4">
-          <CheckCircle className="text-[#00D4FF]" size={32} />
-        </div>
-        <h3 className="font-poppins font-bold text-xl text-[#F0F4FF] mb-2">
-          Request Received!
-        </h3>
-        <p className="text-[#6B7FA3]">
-          Our team will contact you within 1 business day to schedule your personalized demo.
-        </p>
-      </div>
-    )
-  }
+
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} noValidate>

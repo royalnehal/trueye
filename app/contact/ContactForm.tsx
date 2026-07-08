@@ -4,7 +4,6 @@ import { useRouter } from 'next/navigation'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { z } from 'zod'
-import { CheckCircle } from 'lucide-react'
 import { cn } from '@/lib/utils'
 
 const schema = z.object({
@@ -32,16 +31,6 @@ export default function ContactForm() {
     })
     if (!res.ok) throw new Error('Failed to send')
     router.push('/thank-you')
-  }
-
-  if (submitted) {
-    return (
-      <div className="text-center py-6">
-        <CheckCircle className="text-[#00D4FF] mx-auto mb-3" size={36} />
-        <h3 className="font-poppins font-bold text-lg text-[#F0F4FF] mb-2">Message Sent!</h3>
-        <p className="text-[#6B7FA3] text-sm">We&apos;ll get back to you within 1 business day.</p>
-      </div>
-    )
   }
 
   return (
